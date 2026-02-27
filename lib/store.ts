@@ -10,9 +10,12 @@ interface AppState {
   assets: Asset[];
   talent: AgencyTalent[];
   activity: ActivityItem[];
+  sidebarOpen: boolean;
   login: (user: User) => void;
   logout: () => void;
   setRole: (role: "creator" | "agency") => void;
+  setSidebarOpen: (open: boolean) => void;
+  toggleSidebar: () => void;
   addAsset: (asset: Asset) => void;
   updateAsset: (id: string, updates: Partial<Asset>) => void;
   addWardrobeItem: (assetId: string, item: Asset["wardrobeItems"][0]) => void;
@@ -27,9 +30,12 @@ export const useAppStore = create<AppState>()(
       assets: mockAssets,
       talent: mockTalent,
       activity: mockActivity,
+      sidebarOpen: false,
       login: (user) => set({ user, isAuthenticated: true, currentRole: user.role }),
       logout: () => set({ user: null, isAuthenticated: false }),
       setRole: (role) => set({ currentRole: role }),
+      setSidebarOpen: (open) => set({ sidebarOpen: open }),
+      toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
       addAsset: (asset) =>
         set((state) => ({
           assets: [asset, ...state.assets],
