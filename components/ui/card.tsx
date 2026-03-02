@@ -1,8 +1,20 @@
-interface CardProps { children: React.ReactNode; className?: string; hover?: boolean; onClick?: () => void; }
+interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+  hover?: boolean;
+  onClick?: () => void;
+}
 
 export function Card({ children, className = "", hover = false, onClick }: CardProps) {
   return (
-    <div className={`bg-slate-800/80 border border-slate-700 rounded-xl p-6 backdrop-blur-sm ${hover ? "hover:border-slate-600 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer" : ""} ${className}`} onClick={onClick}>
+    <div
+      className={`bg-slate-800/50 border border-slate-700/50 rounded-xl p-6 backdrop-blur-sm shadow-lg shadow-black/20 ${
+        hover
+          ? "hover:border-slate-600 hover:shadow-xl hover:shadow-black/30 transition-all duration-200 cursor-pointer"
+          : ""
+      } ${className}`}
+      onClick={onClick}
+    >
       {children}
     </div>
   );
@@ -13,7 +25,7 @@ export function CardHeader({ children, className = "" }: { children: React.React
 }
 
 export function CardTitle({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <h3 className={`text-lg font-semibold text-slate-50 ${className}`}>{children}</h3>;
+  return <h3 className={`text-xl font-semibold text-slate-50 ${className}`}>{children}</h3>;
 }
 
 export function CardContent({ children, className = "" }: { children: React.ReactNode; className?: string }) {
